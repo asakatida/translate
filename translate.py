@@ -3,68 +3,13 @@
 import sys
 from num2words import num2words
 
-BASE = {
-    0: ' _ ',
-    '': '',
-    'a': 'a',
-    'b': 'b',
-    'c': 'c',
-    'd': 'd',
-    'e': 'e',
-    'f': 'f',
-    'g': 'g',
-    'h': 'h',
-    'i': 'i',
-    'j': 'j',
-    'k': 'k',
-    'l': 'l',
-    'm': 'm',
-    'n': 'n',
-    'o': 'o',
-    'p': 'p',
-    'q': 'q',
-    'r': 'r',
-    's': 's',
-    't': 't',
-    'u': 'u',
-    'v': 'v',
-    'w': 'w',
-    'x': 'x',
-    'y': 'y',
-    'z': 'z'}
 UNCHANGE = {
-    0: BASE,
-    '': BASE,
-    'a': BASE,
-    'b': BASE,
-    'c': BASE,
-    'd': BASE,
-    'e': BASE,
-    'f': BASE,
-    'g': BASE,
-    'h': BASE,
-    'i': {
-        0: ' _ ',
-        'k': 'a'},
-    'j': BASE,
-    'k': BASE,
-    'l': BASE,
-    'm': BASE,
-    'n': BASE,
-    'o': BASE,
-    'p': {
-        0: ' _ ',
-        'i': 'd'},
-    'q': BASE,
-    'r': BASE,
-    's': BASE,
-    't': BASE,
-    'u': BASE,
-    'v': BASE,
-    'w': BASE,
-    'x': BASE,
-    'y': BASE,
-    'z': BASE}
+    'b': {'i': ''},
+    'e': {'b': 'm'},
+    'i': {'k': 'a'},
+    'k': {'': '', 'o': ''},
+    'o': {'p': ''},
+    'p': {'': 'd', 'i': 'd'}}
 
 
 def change(test=None):
@@ -256,14 +201,17 @@ def unchange(cypher):
     """
     Crack cypher.
     """
+    it = iter(cypher.lower())
     last = ''
 
     def _unchange(c):
-        nonlocal last
+        nonlocal it, last
         last, _l = c, last
-        look = UNCHANGE.get(c, UNCHANGE[0])
-        return look.get(_l, look[0])
-    return ''.join(map(_unchange, cypher.lower()))
+        look = UNCHANGE.get(c, f'({ c })')
+        if isinstance(look, dict):
+            return look.get(_l, f'({ _l })')
+        return str(look)
+    return ''.join(map(_unchange, it))
 
 
 if __name__ == '__main__':
