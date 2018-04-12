@@ -3,13 +3,16 @@
 import sys
 from num2words import num2words
 
+'ssonasss'
 UNCHANGE = {
     'b': {'i': ''},
     'e': {'b': 'm'},
     'i': {'k': 'a'},
     'k': {'': '', 'o': ''},
+    'n': {'o': 'i'},
     'o': {'p': ''},
-    'p': {'': 'd', 'i': 'd'}}
+    'p': {'': 'd', 'i': 'd'},
+    's': {'': '', 'a': 'f', 's': 'q'}}
 
 
 def change(test=None):
