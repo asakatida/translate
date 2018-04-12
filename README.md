@@ -11,3 +11,7 @@ Example:
 `python translate.py shannon`
 Output:
 `shkibobedobe`
+
+## Application
+
+This was originally made to be a quick and easy fake language creater for books and games.  Simple enter what is to be said in a known language and out pops something new for you to use.
