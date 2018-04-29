@@ -1,13 +1,15 @@
 language: python
+cache: pip
 python:
   - "3.6"
 
-install:
-  - pip install pytest-cov
-  - pip install num2words
-
 script:
   - pytest --cov-report term-missing --cov=translate
+
+after_script:
+  - pip install --quiet coveralls
+  - coverage run setup.py test
+  - coveralls
 
 notifications:
   email: false
