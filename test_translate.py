@@ -33,12 +33,13 @@ def test_long_valids():
 
 def test_invalid():
     """Test invalid inputs."""
-    fail = 'Try again. Valid inputs are letters, spaces, and dashes.'
+    fail = 'Try again. Valid inputs are letters, spaces, and these special' \
+        ' charactors: . , - _ ? ! ( ) :'
     assert t(1) == fail
-    assert t('.') == fail
     assert t('1') == fail
     assert t('@') == fail
     assert t('') == fail
+    assert t() == fail
 
 
 def test_letters():
