@@ -1,7 +1,10 @@
+"""This file is used for the logic of the translation."""
+
 import sys
 
 
 def change(test=None):
+    """Translate the string."""
     try:
         message = ''
         new = ''

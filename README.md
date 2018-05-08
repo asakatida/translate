@@ -1,6 +1,6 @@
 #### Translator
 
-This is a translator that takes in a word or sentence of any language, consisting of letters, spaces, and dashes, and translates it into a pronounceable but unreadable version of the language.  The end translation was designed to easily be able to be converted back to legibility with ease to any person with a legend, but be difficult to write code for a computer to decypher it.
+This is a translator that takes in a word or sentence of any language, consisting of letters, spaces, and dashes, and translates it into a pronounceable but unreadable version of the language.  The end translation was designed to easily be able to be converted back to legibility with ease to any person with a legend, but be difficult to write code for a computer to decipher it.
 
 ## Usage
 
