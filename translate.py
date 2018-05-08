@@ -8,14 +8,11 @@ def change(test=None):
     try:
         message = ''
         new = ''
-        n = False
-        o = False
-        m = False
-        p = False
-        e = False
-        f = False
-        r = False
-        t = False
+        n, o, m, p, e, f, r, t = False, False, False, False, False, False, \
+            False, False
+        valid_non_letters = ['.', ' ', ',', '-', '_', '?', '!', '(', ')', ':']
+        fail = 'Try again. Valid inputs are letters, spaces, and these' \
+            ' special charactors: . , - _ ? ! ( ) :'
 
         if test:
             message = test.lower()
@@ -109,29 +106,43 @@ def change(test=None):
                 t = True
             elif last == 't' and t is True:
                 last = 'no'
-            elif last == ' ' or last == '-':
-                n = False
-                o = False
-                m = False
-                p = False
-                e = False
-                f = False
-                r = False
-                t = False
+            elif last in valid_non_letters:
+                n, o, m, p, e, f, r, t = False, False, False, False, False, \
+                    False, False, False
             elif last == '':
-                last == ''
+                pass
+            elif last == '1':
+                last = 'dobomo'
+            elif last == '2':
+                last = 'pinndo'
+            elif last == '3':
+                last = 'pichmoma'
+            elif last == '4':
+                last = 'asdonch'
+            elif last == '5':
+                last = 'asonumo'
+            elif last == '6':
+                last = 'shoner'
+            elif last == '7':
+                last = 'shmoumabo'
+            elif last == '8':
+                last = 'moonbavpi'
+            elif last == '9':
+                last = 'boonbemo'
+            elif last == '0':
+                last = 'watmochdo'
             else:
                 last = 'FAILED'
             new += last
             last = letter
 
         if 'FAILED' in new:
-            return 'Try again. Valid inputs are letters, spaces, and dashes.'
+            return fail
         else:
             return new
 
     except Exception:
-        return 'Try again. Valid inputs are letters, spaces, and dashes.'
+        return fail
 
 
 if __name__ == '__main__':
