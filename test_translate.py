@@ -36,7 +36,6 @@ def test_invalid():
     fail = 'Try again. Valid inputs are letters, spaces, and these special' \
         ' charactors: . , - _ ? ! ( ) :'
     assert t(1) == fail
-    assert t('1') == fail
     assert t('@') == fail
     assert t('') == fail
     assert t() == fail
@@ -49,3 +48,11 @@ def test_letters():
         ' ululul vavava popopo momama asusus bavobav  ononon bovbovbov' \
         ' aeaeae kakaka bebobo bobebe dodede sii ssssss chochoch shash' \
         ' pinono nnn uuu nnnnnn ererer ththth watwatwat'
+
+
+def test_numbers():
+    """Testing of numbers."""
+    assert t('1 2 3 4 5 6 7 8 9 0') == 'dobomo pinndo pichmoma asdonch' \
+        ' asonumo shoner shmoumabo moonbavpi boonbemo watmochdo'
+    assert t('1234567890') == 'dobomopinndopichmomaasdonchasonumoshoner' \
+        'shmoumabomoonbavpiboonbemowatmochdo'
