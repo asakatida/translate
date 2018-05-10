@@ -1,0 +1,91 @@
+-Non-Existent Characters-
+
+h
+
+-Non-Special Characters-
+
+a -> ki
+b -> ul
+c -> va
+d -> po
+i -> on
+j -> bov
+k -> ae
+l -> ka
+q -> ss
+u -> n
+v -> u
+w -> nn
+x -> er
+y -> th
+z -> wat
+
+-Double Characters-
+
+s -> sh
+ss -> sha
+
+g -> bav
+gg -> bavo
+
+-First Instance Characters-
+
+    These characters will be different if they are the first time they
+    are showing up in a word.
+
+    EXAMPLE: "example" The first e ("e"xample) will be "mo" but the
+    second e (exampl"e") will be "ma" for a final translation 
+    of "moerkibeskama"
+
+e1 -> mo
+e+ -> ma
+f1 -> as
+f+ -> us
+m1 -> be
+m+ -> bo
+n1 -> bo
+n+ -> be
+o1 -> do
+o+ -> de
+p1 -> s
+p+ -> i
+r1 -> ch
+r+ -> och
+t1 -> pi
+t+ -> no
+
+-Reverse-
+
+ae -> k
+as -> f1
+bav -> g
+bavo -> gg
+be -> m1 or n+
+bo -> m+ or n1
+bov -> j
+ch -> r1
+de -> o+
+do -> o1
+er -> x
+i -> p+
+ka -> l
+ki -> a
+ma -> e+
+mo -> e1
+n -> u
+nn -> w
+no -> t+
+och -> r+
+on -> i
+pi -> t1
+po -> d
+s -> p1
+sh -> s
+sha -> ss
+ss -> q
+th -> y
+u -> v
+ul -> b
+us -> f+
+va -> c
+wat -> z
