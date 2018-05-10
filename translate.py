@@ -1,6 +1,7 @@
 """This file is used for the logic of the translation."""
 
 import sys
+from num2words import num2words
 
 
 def change(test=None):
@@ -8,11 +9,14 @@ def change(test=None):
     try:
         message = ''
         new = ''
+        num_stuff = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
         n, o, m, p, e, f, r, t = False, False, False, False, False, False, \
             False, False
-        valid_non_letters = ['.', ' ', ',', '-', '_', '?', '!', '(', ')', ':']
-        fail = 'Try again. Valid inputs are letters, spaces, and these' \
-            ' special charactors: . , - _ ? ! ( ) :'
+        valid_non_letters = [',', ' ', '_', '?', '!', '(', ')', ':']
+        fail = 'Try again. Valid inputs are letters, spaces, numbers and' \
+            ' these special characters: . , - _ ? ! ( ) :'
+        num = False
+        count = 0
 
         if test:
             message = test.lower()
@@ -110,30 +114,32 @@ def change(test=None):
                 n, o, m, p, e, f, r, t = False, False, False, False, False, \
                     False, False, False
             elif last == '':
-                pass
-            elif last == '1':
-                last = 'dobomo'
-            elif last == '2':
-                last = 'pinndo'
-            elif last == '3':
-                last = 'pichmoma'
-            elif last == '4':
-                last = 'asdonch'
-            elif last == '5':
-                last = 'asonumo'
-            elif last == '6':
-                last = 'shoner'
-            elif last == '7':
-                last = 'shmoumabo'
-            elif last == '8':
-                last = 'moonbavpi'
-            elif last == '9':
-                last = 'boonbemo'
-            elif last == '0':
-                last = 'watmochdo'
+                last = ''
+            elif (last == '.' or last == '-') and letter in num_stuff:
+                if count > 0:
+                    pass
+                else:
+                    temp, message, count = gather(message)
+                    new += temp
+                    num = True
+            elif last == '.' or last == '-':
+                n, o, m, p, e, f, r, t = False, False, False, False, False, \
+                    False, False, False
+            elif last in num_stuff:
+                if count > 0:
+                    pass
+                else:
+                    temp, message, count = gather(message)
+                    new += temp
+                    num = True
             else:
                 last = 'FAILED'
-            new += last
+            if num is True:
+                num = False
+            elif count > 0:
+                count -= 1
+            else:
+                new += last
             last = letter
 
         if 'FAILED' in new:
@@ -143,6 +149,44 @@ def change(test=None):
 
     except Exception:
         return fail
+
+
+def gather(message):
+    """
+    Gather up the nums and return the translation.
+
+    Input the full message as a string and this will find the first
+    instance of numbers and translate the whole number including negatives
+    and decimals.
+
+    This will output the final translated number, the original message not
+    including the now translated number, and the length of the removed section
+    of the string.  This will be formated in that order in a tuple.
+    """
+    num_stuff = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.', '-']
+    new = ''
+
+    num = 0
+
+    for char in message:
+        if char in num_stuff and (num == 0 or num == 1):
+            num = 1
+            message = message.replace(char, '', 1)
+            new += char
+        elif num == 1:
+            break
+
+    if new[-1] == '.':
+        new = new[:-1]
+
+    count = len(new) - 1
+
+    if '.' in new:
+        new = change(num2words(float(new)))
+    else:
+        new = change(num2words(int(new)))
+
+    return (new, message, count)
 
 
 if __name__ == '__main__':

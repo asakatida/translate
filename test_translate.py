@@ -33,8 +33,8 @@ def test_long_valids():
 
 def test_invalid():
     """Test invalid inputs."""
-    fail = 'Try again. Valid inputs are letters, spaces, and these special' \
-        ' charactors: . , - _ ? ! ( ) :'
+    fail = 'Try again. Valid inputs are letters, spaces, numbers and these' \
+        ' special characters: . , - _ ? ! ( ) :'
     assert t(1) == fail
     assert t('@') == fail
     assert t('') == fail
@@ -54,5 +54,26 @@ def test_numbers():
     """Testing of numbers."""
     assert t('1 2 3 4 5 6 7 8 9 0') == 'dobomo pinndo pichmoma asdonch' \
         ' asonumo shoner shmoumabo moonbavpi boonbemo watmochdo'
-    assert t('1234567890') == 'dobomopinndopichmomaasdonchasonumoshoner' \
-        'shmoumabomoonbavpiboonbemowatmochdo'
+
+
+def test_big_numbers():
+    """Testing larger numbers and special cases."""
+    assert t('150') == 'dobomo nbopochmopo kibopo asonuspith'
+    assert t('6874.893') == 'shoner pidonshkibopo, moonbavpi nbopochmopo' \
+        ' kibopo shmoumabopith-asdonch sdoonbopi moonbavpi boonbemo pichmoma'
+    assert t('i have 12 apples') == 'on kiumo pinnmokauma kisikamosh'
+    assert t('i have 6.5 apples.') == 'on kiumo shoner sdoonbopi asonumo' \
+        ' kisikamosh.'
+    assert t('i have .57 apples') == 'on kiumo watmochdo sdoonbopi asonumo' \
+        ' shmoumabo kisikamosh'
+    assert t('there are 27.') == 'pimochma kichmo pinnmobonoth-shmoumabo.'
+    assert t('there are .5.') == 'pimochma kichmo watmochdo sdoonbopi asonumo.'
+    assert t('there are 3892.4685.') == 'pimochma kichmo pichmoma' \
+        ' pidonshkibopo, moonbavpi nbopochmopo kibopo boonbemopith-pinndo' \
+        ' sdoonbopi asdonch shoner moonbavpi asonumo.'
+    assert t('1234567890') == 'dobomo ulonkakaondobo, pinndo nbopochmopo' \
+        ' kibopo pionchnoth-asdonch beonkakaondobo, asonumo nbopochmopo' \
+        ' kibopo shonerpith-shmoumabo pidonshkibopo, moonbavpi nbopochmopo' \
+        ' kibopo boonbemopith'
+    assert t('-127') == 'beonbonsh dobomo nbopochmopo kibopo pinnmobonoth' \
+        '-shmoumabo'
