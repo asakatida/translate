@@ -5,7 +5,7 @@
         <h2 id="translate-header">Enter text to translate</h2>
         <form id="translate-form" action="/translate/translation/" method="POST">
             {% csrf_token %}
-            <input id="translate-text" type="text" name="translate-text" value="Translate it">
+            <input id="translate-text" type="text" name="translate-text" placeholder="Translate it">
             <input id="translate-submit" type="submit" value="Translate">
         </form>
     </div>

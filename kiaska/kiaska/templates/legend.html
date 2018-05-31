@@ -3,6 +3,103 @@
 {% block content %}
     <div id="legend">
         <h2 id="legend-header">Legend</h2>
-        <p id="legend-body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum saepe minus commodi odit quo voluptates tempora dolorem rem dignissimos. Fugit accusantium perspiciatis recusandae quasi deserunt dolore tempora iure laborum magnam.</p>
+
+        <h3 id="legend-cat-non-existent">Non-Existent Characters</h3>
+
+        <ul id="legend-section-non-existent">
+            <li>h</li>
+        </ul>
+
+        <h3 id="legend-cat-non-special">Non-Special Characters</h3>
+
+        <ul id="legend-section-non-special">
+            <li>a -> ki</li>
+            <li>b -> ul</li>
+            <li>c -> va</li>
+            <li>d -> po</li>
+            <li>i -> on</li>
+            <li>j -> bov</li>
+            <li>k -> ae</li>
+            <li>l -> ka</li>
+            <li>q -> ss</li>
+            <li>u -> n</li>
+            <li>v -> u</li>
+            <li>w -> nn</li>
+            <li>x -> er</li>
+            <li>y -> th</li>
+            <li>z -> wat</li>
+        </ul>
+
+        <h3 id="legend-cat-double">Double Characters</h3>
+
+        <ul id="legend-section-double">
+            <li id="legend-single-s">s -> sh</li>
+            <li id="legend-double-s">ss -> sha</li>
+            <li id="legend-single-g">g -> bav</li>
+            <li id="legend-double-g">gg -> bavo</li>
+        </ul>
+
+        <h3 id="legend-cat-first">First Instance Characters</h3>
+
+        <p id="legend-first-first-description">These characters will be different if they are the first time they are showing up in a word.</p>
+        <p id="legend-first-second-description">EXAMPLE: "example" The first e ("e"xample) will be "mo" but the second e (exampl"e") will be "ma" for a final translation of "moerkibeskama"</p>
+
+        <ul id="legend-section-first">
+            <li>e1 -> mo</li>
+            <li>e+ -> ma</li>
+            <li>f1 -> as</li>
+            <li>f+ -> us</li>
+            <li>m1 -> be</li>
+            <li>m+ -> bo</li>
+            <li>n1 -> bo</li>
+            <li>n+ -> be</li>
+            <li>o1 -> do</li>
+            <li>o+ -> de</li>
+            <li>p1 -> s</li>
+            <li>p+ -> i</li>
+            <li>r1 -> ch</li>
+            <li>r+ -> och</li>
+            <li>t1 -> pi</li>
+            <li>t+ -> no</li>
+        </ul>
+
+        <h3 id="legend-cat-reverse">Reverse</h3>
+
+        <ul id="legend-section-reverse">
+            <li>ae -> k</li>
+            <li>as -> f1</li>
+            <li>bav -> g</li>
+            <li>bavo -> gg</li>
+            <li>be -> m1 or n+</li>
+            <li>bo -> m+ or n1</li>
+            <li>bov -> j</li>
+            <li>ch -> r1</li>
+            <li>de -> o+</li>
+            <li>do -> o1</li>
+            <li>er -> x</li>
+            <li>i -> p+</li>
+            <li>ka -> l</li>
+            <li>ki -> a</li>
+            <li>ma -> e+</li>
+            <li>mo -> e1</li>
+            <li>n -> u</li>
+            <li>nn -> w</li>
+            <li>no -> t+</li>
+            <li>och -> r+</li>
+            <li>on -> i</li>
+            <li>pi -> t1</li>
+            <li>po -> d</li>
+            <li>s -> p1</li>
+            <li>sh -> s</li>
+            <li>sha -> ss</li>
+            <li>ss -> q</li>
+            <li>th -> y</li>
+            <li>u -> v</li>
+            <li>ul -> b</li>
+            <li>us -> f+</li>
+            <li>va -> c</li>
+            <li>wat -> z</li>
+        </ul>
+
     </div>
 {% endblock %}
