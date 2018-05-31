@@ -1,6 +1,11 @@
 """Test for translate.py."""
 
-from .translate import change as t
+from .translate import change as t, unchange as u
+from random import choices
+from string import ascii_letters
+
+# pop = ascii_letters + '- '
+pop = 'adfimq'
 
 
 def test_single_valids():
@@ -77,3 +82,12 @@ def test_big_numbers():
         ' kibopo boonbemopith'
     assert t('-127') == 'beonbonsh dobomo nbopochmopo kibopo pinnmobonoth' \
         '-shmoumabo'
+
+
+def test_roundtrip():
+    """Test roundtrip through unchange."""
+    assert u(t('adam')) == 'adam'
+    assert u(t('qifq')) == 'qifq'
+    for _ in range(10):
+        start = ''.join(choices(pop, k=100)).lower()
+        assert u(t(start)) == start

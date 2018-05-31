@@ -3,6 +3,17 @@
 import sys
 from num2words import num2words
 
+'ssonasss'
+UNCHANGE = {
+    'b': {'i': ''},
+    'e': {'b': 'm'},
+    'i': {'k': 'a'},
+    'k': {'': '', 'o': ''},
+    'n': {'o': 'i'},
+    'o': {'p': ''},
+    'p': {'': 'd', 'i': 'd'},
+    's': {'': '', 'a': 'f', 's': 'q'}}
+
 
 def change(test=None):
     """Translate the string."""
@@ -187,6 +198,23 @@ def gather(message):
         new = change(num2words(int(new)))
 
     return (new, message, count)
+
+
+def unchange(cypher):
+    """
+    Crack cypher.
+    """
+    it = iter(cypher.lower())
+    last = ''
+
+    def _unchange(c):
+        nonlocal it, last
+        last, _l = c, last
+        look = UNCHANGE.get(c, f'({ c })')
+        if isinstance(look, dict):
+            return look.get(_l, f'({ _l })')
+        return str(look)
+    return ''.join(map(_unchange, it))
 
 
 if __name__ == '__main__':
