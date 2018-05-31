@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="translation">
+        <h2 id="translation-header">Enter text to translate</h2>
+        <p id="translation-original">{{ original }}</p>
+        <p id="translation-new">{{ new }}</p>
+        <a href="{% url "translate" %}"><button id="translation-button">Again</button></a>
+    </div>
+{% endblock %}
