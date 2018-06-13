@@ -10,7 +10,7 @@ def translation_view(request):
         context = {}
 
         original = request.POST['translate-text']
-        new = change(original)
+        new = change(original)  # this runs over to translate.py and translates
 
         context['original'] = original
         context['new'] = new
