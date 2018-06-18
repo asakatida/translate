@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="splash">
+        <h2 id="splash-header">What is Kiaska</h2>
+        <p id="splash-body">Kiaska is a tool to translate some text into a fictional language.  The name Kiaska comes from the translation of AFL or A Fictional Language.  This language was designed to be able translate it back to it's original text easily by a human using the legend but difficult for a computer to accurately accomplish the same task.  The language can be used to send secret messages to a friend, make a fictional language for a book or game, or as a little cryptography brain puzzle.</p>
+        <a href="{% url "translate" %}"><button id="splash-button">Start</button></a>
+    </div>
+{% endblock %}
