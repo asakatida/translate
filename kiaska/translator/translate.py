@@ -1,6 +1,7 @@
 """This file is used for the logic of the translation."""
 
 import string
+import re
 from num2words import num2words  # used for accurately translating numbers
 
 
@@ -111,7 +112,7 @@ def change(new_input):
                 temp, message, count = gather(message)
                 new += temp
                 num = True
-        elif last in string.digits:  # if a number
+        elif last and last in string.digits:  # if a number
             if count > 0:  # used for skipping the remainder of a number
                 pass
             else:
@@ -119,12 +120,14 @@ def change(new_input):
                 new += temp
                 num = True
 
-        if last in valid_non_letters:  # reset instances at end of word
+        # reset instances if end of word
+        if last and last in valid_non_letters:
             for char in extras:
                 change_cases[char]['switch'] = False
 
         if num:  # if a number is found then skip insertion
             num = False
+            count -= 1
         elif count > 0:  # wait to insert until through the number
             count -= 1
         else:  # add translated letter (or number) to new string
@@ -147,40 +150,19 @@ def gather(message):
     including the now translated number, and the length of the removed section
     of the string.  This will be formated in that order in a tuple.
     """
-    num_stuff = '1234567890.-'
-    new = ''
+    r = '-?(?=\d|\.)\d*\.?(?=\d)\d*'
+    match = re.search(r, message)
+    new = match.group(0)
 
-    is_num = False  # for loop below will always loop once
-    neg_start = False
-    dash = False
+    message = message.replace(new, '', 1)
+    count = len(new)
 
-    for char in message:  # loop to strip number out of message
-        if neg_start and char == '-':
-            message = message.replace(char, '', 1)
-            dash = True
-            break
-        elif char in num_stuff:
-            neg_start = True
-            is_num = True
-            message = message.replace(char, '', 1)
-            new += char
-        elif is_num:
-            break
-
-    if new[-1] == '.':  # false positive decimal number handling
-        new = new[:-1]
-
-    if dash:
-        count = len(new)
-    else:
-        count = len(new) - 1
+    if new[0] == '-' and new[1] == '.':
+        count -= 1
 
     if '.' in new:  # float or int?
         new = change(num2words(float(new)))
-    else:
+    elif new:
         new = change(num2words(int(new)))
-
-    if dash:
-        new += '-'
 
     return (new, message, count)
