@@ -8,12 +8,11 @@ from num2words import num2words  # used for accurately translating numbers
 def change(new_input):
     """Translate the string."""
     new = ''  # final translation
-    last = ''  # temp for modifying
     extras = 'efmnoprt'  # multi instance cases
     valid_non_letters = f'{string.punctuation} '
     fail = 'Invalid input.'
-    num = False  # if a num has been seen
     count = 0  # number length count
+    i = 0  # index for iterating through message
     change_cases = {
         'h': {'one': ''},  # Empty case
         'a': {'one': 'ki'},  # Basic cases
@@ -34,42 +33,42 @@ def change(new_input):
         'e': {  # Multi instance cases
             'one': 'mo',  # first instance
             'extra': 'ma',  # extra instances
-            'switch': False,  # used to see if instance exists yet
+            'seen': False,  # used to see if instance exists yet
         },
         'f': {
             'one': 'as',
             'extra': 'us',
-            'switch': False,
+            'seen': False,
         },
         'm': {
             'one': 'be',
             'extra': 'bo',
-            'switch': False,
+            'seen': False,
         },
         'n': {
             'one': 'bo',
             'extra': 'be',
-            'switch': False,
+            'seen': False,
         },
         'o': {
             'one': 'do',
             'extra': 'de',
-            'switch': False,
+            'seen': False,
         },
         'p': {
             'one': 's',
             'extra': 'i',
-            'switch': False,
+            'seen': False,
         },
         'r': {
             'one': 'ch',
             'extra': 'och',
-            'switch': False,
+            'seen': False,
         },
         't': {
             'one': 'pi',
             'extra': 'no',
-            'switch': False,
+            'seen': False,
         },
         'g': {  # Double cases
             'one': 'bav',  # g
@@ -82,58 +81,52 @@ def change(new_input):
     }
 
     if new_input:
-        message = new_input.lower()
-        message += ' '  # used for the letter/last assignment
+        # the extra space here is for the index handling assignment
+        message = new_input.lower() + ' '
     else:
         return fail
 
-    for letter in message:  # letter is assigned to last and last is modified
-        if last in change_cases.keys():  # if letter
-            if 'switch' in change_cases[last].keys():  # if multi instance case
-                if change_cases[last]['switch']:  # if seen
-                    last = change_cases[last]['extra']
+    for _ in range(len(message) - 1):
+        if message[i] in change_cases.keys():  # if letter
+            if 'seen' in change_cases[message[i]].keys():  # if multi instance
+                if change_cases[message[i]]['seen']:  # if seen
+                    temp = change_cases[message[i]]['extra']
                 else:  # if first instance
-                    change_cases[last]['switch'] = True
-                    last = change_cases[last]['one']
-            elif 'two' in change_cases[last].keys():  # if double case
-                if letter == last:  # if double
-                    last = change_cases[last]['two']
-                    letter = ''
+                    change_cases[message[i]]['seen'] = True
+                    temp = change_cases[message[i]]['one']
+            elif 'two' in change_cases[message[i]].keys():  # if double case
+                if message[i + 1] == message[i]:  # if double
+                    temp = change_cases[message[i]]['two']
+                    i += 1  # skip second letter in double
+                    message += ' '  # for finishing the for loop
                 else:  # if single
-                    last = change_cases[last]['one']
+                    temp = change_cases[message[i]]['one']
             else:  # if base case
-                last = change_cases[last]['one']
+                temp = change_cases[message[i]]['one']
 
-        if (last == '.' or last == '-') and letter in string.digits:
-            # used for numbers like .12 or -12
-            if count > 0:  # used for skipping the remainder of a number
-                pass
-            else:
-                temp, message, count = gather(message)
-                new += temp
-                num = True
-        elif last and last in string.digits:  # if a number
-            if count > 0:  # used for skipping the remainder of a number
-                pass
-            else:
-                temp, message, count = gather(message)
-                new += temp
-                num = True
+        if is_number(message, i):
+            if count == 0:
+                number, message, count = gather(message)
+                new += number
 
         # reset instances if end of word
-        if last and last in valid_non_letters:
-            for char in extras:
-                change_cases[char]['switch'] = False
+        if message[i] and message[i] in valid_non_letters:
+            temp = message[i]
+            for char in extras:  # efmnoprt
+                change_cases[char]['seen'] = False
 
-        if num:  # if a number is found then skip insertion
-            num = False
-            count -= 1
-        elif count > 0:  # wait to insert until through the number
+        if count > 0:  # wait to insert until through the number
             count -= 1
         else:  # add translated letter (or number) to new string
-            new += last
+            new += temp
 
-        last = letter
+        i += 1  # next letter
+
+    for j in range(len(new) - 1, 0, -1):  # remove spaces at the end
+        if new[j] == ' ':
+            new = new[:-1]
+        else:
+            break
 
     return new
 
@@ -150,19 +143,43 @@ def gather(message):
     including the now translated number, and the length of the removed section
     of the string.  This will be formated in that order in a tuple.
     """
-    r = '-?(?=\d|\.)\d*\.?(?=\d)\d*'
+    r = '-?(?=\d|\.)\d*\.?(?=\d)\d*'  # |42|4.2|.42|-42|-4.2|-.42|
     match = re.search(r, message)
     new = match.group(0)
+    special_case = False
 
-    message = message.replace(new, '', 1)
-    count = len(new)
+    count = len(new)  # used for skipping the number in the translate for loop
+    for i in range(len(new)):
+        message = message.replace(new[i], ' ', 1)  # remove number from message
 
-    if new[0] == '-' and new[1] == '.':
-        count -= 1
+    if new[0] == '-' and (new[1] == '.' or new[1] == '0'):  # weird case
+        special_case = True
 
-    if '.' in new:  # float or int?
-        new = change(num2words(float(new)))
-    elif new:
-        new = change(num2words(int(new)))
+    new = change(num2words(float(new)))
+
+    if special_case:
+        new = 'beonbonsh ' + new
 
     return (new, message, count)
+
+
+def is_number(message, i):
+    """
+    Check to see if the values given make a number.
+
+    True: .1
+    True: -1
+    True: 1
+    True: -.1
+    False: ..
+    False: --
+    False: a
+    False: -a
+    False: .a
+    """
+    check_one = bool(message[i] == '.' or message[i] == '-')
+    check_two = bool(check_one and message[i + 1] in string.digits)
+    check_three = bool(message[i] and message[i] in string.digits)
+    check_four = bool(message[i] == '-' and message[i + 1] == '.')
+    check_five = bool(check_four and message[i + 2] in string.digits)
+    return check_two or check_three or check_five
