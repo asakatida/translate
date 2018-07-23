@@ -69,12 +69,15 @@ def test_big_numbers():
         ' kibopo boonbemopith'
     assert t('-127') == 'beonbonsh dobomo nbopochmopo kibopo pinnmobonoth' \
         '-shmoumabo'
+    assert t('-6.6.6') == 'beonbonsh shoner sdoonbopi shonerwatmochdo sdo' \
+        'onbopi shoner'
+    assert t('-.6') == 'beonbonsh watmochdo sdoonbopi shoner'
 
 
 def test_randoms():
     """Testing that a whole bunch of strings work and don't fail."""
     for i in range(1000):
         test_string = ''.join(random.choice(
-            string.ascii_letters + string.digits + string.punctuation
+            string.ascii_letters + string.digits + string.punctuation + ' '
             ) for _ in range(1000))
-        assert t(test_string)
+        assert t(test_string) != 'Invalid input.'
