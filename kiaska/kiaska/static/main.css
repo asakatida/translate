@@ -1,0 +1,304 @@
+html {
+    font-family: 'Ubuntu', sans-serif;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    background-color: lightgray;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+input {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+header {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    width: 70vw;
+    background-color: white;
+}
+
+nav {
+    float: right;
+    margin-top: 15px;
+}
+
+nav * {
+    display: inline;
+    padding-left: 1vw;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+h1 {
+    display: inline;
+    color: #2980b9;
+    font-weight: bold;
+    font-size: 2ch;
+}
+
+main {
+    background: #2980b9;
+    color: white;
+    width: 80vw;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 10vw;
+    margin-bottom: 10vw;
+}
+
+#hamburger {
+    display: none;
+    width: 65px;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+}
+
+nav input[type=checkbox] {
+    display: none;
+}
+
+nav input[type=checkbox]:checked ~ ul {
+    display: block;
+    position: fixed;
+    list-style: none;
+    width: 65px;
+    padding-right: 15vw;
+    right: 0px;
+    background: white;
+    line-height: 30px;
+}
+
+nav input[type=checkbox]:checked ~ ul li {
+    display: block;
+}
+
+#splash {
+    padding-left: 5vw;
+    width: 70vw;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+#splash-header {
+    margin-top: 0px;
+    text-align: center;
+}
+
+#splash-body {
+    line-height: 20px;
+}
+
+#splash-button {
+    color: white;
+    background-color: #3498DB;
+    border-radius: 3px;
+    border-width: 0px;
+    font-size: 1ch;
+    padding: 6px 12px;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#translate {
+    padding-left: 15vw;
+    width: 50vw;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+#translate-header {
+    display: block;
+    margin-bottom: 0px;
+    font-size: 1ch;
+    font-weight: normal;
+}
+
+#translate-text {
+    display: block;
+    margin: auto;
+    padding: 10px;
+    width: 50vw;
+    height: 300px;
+    overflow-y: scroll;
+    font-size: 1ch;
+}
+
+#translate-submit {
+    color: white;
+    background-color: #3498DB;
+    border-radius: 3px;
+    border-width: 0px;
+    font-size: 1ch;
+    padding: 6px 12px;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#translation {
+    padding-left: 15vw;
+    width: 50vw;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+#translation-header-original {
+    margin-top: 0px;
+}
+
+#translation-button {
+    color: white;
+    background-color: #3498DB;
+    border-radius: 3px;
+    border-width: 0px;
+    font-size: 1ch;
+    padding: 6px 12px;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#translation-original, #translation-new {
+    line-height: 20px;
+    width: 50vw;
+    word-wrap: break-word;
+}
+
+#legend {
+    padding-left: 20vw;
+    width: 40vw;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+#legend-header {
+    text-align: center;
+}
+
+#legend li {
+    list-style-type: none;
+    line-height: 20px;
+}
+
+@media screen and (max-width: 720px) {
+
+    html {
+        background-color: #2980b9;
+    }
+
+    header {
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-left: 15vw;
+        padding-right: 15vw;
+    }
+
+    main {
+        margin-bottom: 0px;
+        margin-left: 0px;
+        width: 90vw;
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+
+    nav ul{
+        display: none;
+    }
+
+    #hamburger{
+        display: inline;
+        right: 15vw;
+        cursor: pointer;
+    }
+
+    #splash {
+        width: 80vw;
+    }
+
+    #translate {
+        width: 60vw;
+    }
+
+    #translate-text {
+        width: 60vw;
+    }
+
+    #translation {
+        width: 60vw;
+    }
+
+    #translation-original, #translation-new {
+        width: 60vw;
+        word-wrap: break-word;
+    }
+
+    #legend {
+        padding-left: 10vw;
+        width: 70vw;
+    }
+
+}
+
+@media screen and (max-width: 512px) {
+
+    header {
+        width: 90vw;
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+
+    #hamburger {
+        right: 5vw;
+    }
+
+    nav input[type=checkbox]:checked ~ ul {
+        padding-right: 5vw;
+    }
+
+    #splash {
+        width: 90vw;
+        padding-left: 0px;
+    }
+
+    #translate {
+        width: 80vw;
+        padding-left: 5vw;
+    }
+
+    #translate-text {
+        width: 80vw;
+        padding-left: 0px;
+    }
+
+    #translation {
+        width: 90vw;
+        padding-left: 0px;
+    }
+    #translation-original, #translation-new {
+        width: 90vw;
+    }
+
+    #legend {
+        padding-left: 0px;
+        width: 90vw;
+    }
+
+}
